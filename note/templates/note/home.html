@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block main %}
+    <h1>Notes</h1>
+    <ul>
+      <h3>Tags</h3>
+      {% for tag in tags %}
+      <li><a href="#">{{tag.tag_name}}</a></li>
+      {% endfor %}
+    </ul>
+    <button>
+      <a href="{% url 'create_note' %}">create note</a>
+    </button>
+    <ul>
+      {% if notes %}
+        {% for note in notes %}
+        <li>
+           <a href="{% url 'note' note.slug note.pk %}">{{ note.title|title }} </a>
+           <p> {{ note.content }}</p>
+           <i> {{ note.date_created }}</i>
+        </li>
+        {% endfor %}
+      {% else %}
+         <p>There are no notes</p>
+      {% endif %}
+    </ul>
+{% endblock main %}
